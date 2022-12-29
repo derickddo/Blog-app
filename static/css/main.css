@@ -1,0 +1,479 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+    font-family: 'Oxygen', sans-serif;
+}
+/* body{
+    font-family: 'Outfit'; */
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+.authentication{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.avatar{
+    width: 2.5rem;
+    border-radius: 50%;
+}
+.avatar img{
+    width: 100%;
+    border-radius: 50%;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.profile-avatar{
+    width: 6rem;
+    border-radius: 50%;
+}
+.profile-avatar img{
+    width: 100%;
+    border-radius: 50%;
+}
+.main-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    gap: 1rem;
+}
+
+.name{
+    color: #888;
+    font-weight: bold;
+}
+.small{
+    color: #888;
+}
+/* header{
+    background: black;
+} */
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0 ;  
+    color: white;
+}
+.navbar ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    gap: 2rem;
+}
+.navbar h3, footer h3{
+    letter-spacing: 0.3rem;
+}
+.navbar li{
+    list-style: none;
+    font-weight: bold;
+    color: white;
+}
+.navbar a{
+    color: white;
+}
+.navbar-block{
+    background: #000;  
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1; 
+    height: 5.88875rem;
+    display: flex;
+    align-items: center;
+}
+.categories  img{
+    width: 1rem;
+    margin-left: 0.5rem;
+}
+.categories-block{
+    position: relative;
+    background:black;
+    color: white;
+    height: 15rem;
+    width: 15rem;
+    padding: 2rem;
+    margin-bottom: -15rem;
+    left: 42rem;
+    z-index: 1;
+    display: none;
+}
+.categories-block a{
+    color: white;
+}
+.block{
+    display: block;
+    line-height: 2.3;
+    position: fixed;
+}
+/* .home{
+    margin-top: 4rem;
+} */
+
+
+ .overlay{
+    width: 100%;
+    height: 20rem;
+    background: rgba(0, 0, 0, 0.5);  
+} 
+.banner-image {
+    background: url('./image1.jpg') center/cover;
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    /* margin-top: -1rem; */
+    z-index: -1;
+    color: white;
+    margin-bottom: -2rem;
+} 
+.home{
+    margin-top: 4rem;
+}
+.profile-block{
+margin-top: 7rem;
+}
+
+.banner-image  input{
+    width: 20rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    border: none;
+    margin-bottom: 2rem;
+}
+.upper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.upper input{
+    width: 30rem;
+}
+.btn{
+    padding: 0.8rem 2.5rem;
+    /* background: black; */
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+.btn-black{
+    background: black;
+}
+.btn-danger{
+    background: crimson;
+}
+
+/* .home-wrapper{
+    width: 100%;
+    background: url('./banner.jpg') center/cover ;
+    height: 10rem;
+} */
+/* .overlay{
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    width: 100%;
+    height: 10rem;
+} */
+.home-container{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    margin-top: 4rem;
+}
+.post-container{
+    margin-top: 2rem;  
+}
+.post-container div{
+    line-height: 1.8;
+}
+.post{
+    display: flex;
+    /* background: #35C418; */
+    color: black;
+    margin-bottom: 2rem;
+    gap: 2rem;
+   align-items: center;
+}
+.post-image:hover{
+    transition: 300ms ease-in-out;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+.post-image{
+width: 22rem;
+height: 13.319375rem;
+/* image-resolution:2rem;
+background-size: cover; */
+
+}
+.post a img{
+    width:100%;
+    height: 100%;
+}
+
+.post-content{
+    display: flex;
+    width: 26rem;
+}
+.post-content h3{
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+.post-content .time{
+    color: rgb(173, 173, 173);
+}
+.author {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.post-container h3 a{
+    color: black;
+    font-weight: bold;
+}
+.top{
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 0.4rem;
+}
+.category{
+    background: crimson;
+    text-transform: uppercase;
+    padding: 0.2rem 0.4rem;
+    color: white;
+    font-weight: bold;
+    font-size: 0.6rem;
+}
+.activity-feed{
+    background: #EEE;
+    padding: 2rem 1rem;
+    overflow-y: scroll;
+}
+.activity-feed::-webkit-scrollbar{
+    width: 0;
+}
+.main-post .post-image{
+    width: 50rem;
+    height: 30rem;
+    z-index: -1;
+    margin: 0rem auto;
+    margin-bottom: 1rem;
+}
+.main-post img{
+    width: 100%;
+    height: 100%;
+}
+.main-post{
+    line-height: 1.8;
+    margin-top: 4rem;
+}
+.main-post h2{
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+    font-size: 2.5rem;
+}
+.main-post p{
+    width: 40rem;
+    margin-bottom: 1rem;
+}
+.post-content-container{
+    margin:0 9rem ;
+}
+.buttons{
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+.post-content-container input{
+    width: 49rem;
+    height: 3rem;
+    padding-left: 2rem;
+    margin: 2rem 0;
+}
+.comment{
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    
+}
+.comment-wrapper{
+    background: #EEE;
+    padding: 2rem;
+    overflow-y: scroll;
+    height: 15rem;
+}
+.comment span{
+    margin-left:  2rem;
+}
+.activity-feed-container{
+    margin-top: 2rem;
+}
+.activity{
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    line-height: 1.8;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+.activity h4 a{
+    color: black;
+}
+.message{
+    background: rgb(206, 206, 206);
+    color: black;
+    padding: 0.4rem 1rem;
+    margin-top:  0.5rem;
+}
+.create-post-div form{
+   width: 40rem;
+   margin: 0 auto;
+   background:white;
+   padding: 2rem;
+   margin-top: 6rem;
+}
+.bio{
+    width: 23rem;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #888;
+}
+
+.create-post-div input[type=text],input[type=password],input[type=email] ,select{
+    width: 36rem;
+    line-height: 1.8rem;
+    margin-bottom: 1rem;
+    height: 3rem;
+    padding-left: 1rem;
+    margin-top:0.5rem;
+    font-size: 1rem;
+    border: 2px solid #888;
+}
+textarea{
+    width: 36rem;
+    padding: 1rem;
+    margin-top:0.5rem;
+    font-size: 1rem;
+    font-family: "Segoe UI";
+    height: 10rem;
+    margin-bottom: 0.5rem;
+    border: 2px solid #888;
+    line-height: 1.4;
+}
+.create-post-div input{
+    margin-top: 1rem;
+}
+.create-post {
+   background: url('./image1.jpg') center/cover;
+   padding: 2rem 0;
+   height: 44rem;
+   margin-bottom: -2rem;
+}
+
+.create-post .overlay{
+    height: 44rem;
+    margin-top: -2rem;
+    padding:  2rem 0;
+    
+}
+.delete{
+    width: 30rem;
+    margin: 5rem auto;
+    background: white;
+    color: black;
+    padding:1rem 2rem;
+    height: 12rem;
+}
+.delete .text{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+}
+.delete form div{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+.login p{
+    margin-top: 1rem;
+}
+.sign-up .create-post {
+    margin-bottom: 10rem;
+}
+input[type=submit]{
+    cursor: pointer;
+}
+footer{
+    background: #000;
+    height: 10rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+footer a{
+    color: white;
+}
+
+
+/* .categories h3, .feed-component h3 , .activity-feed h3{
+    
+}
+.categories h3{
+    margin-top: -2rem;
+    margin-bottom: 4rem;
+
+} */
+/* .categories .header{
+    position: fixed;
+    top: 7.5rem;
+} */
+/* .banner{
+    background: url('./images/banner.jpg') center/ cover fixed;
+    height: 10rem;
+    width: 100%;
+} */
+/* .category-container{
+    margin-top: 4rem;
+}
+.category-container div{
+    margin-bottom: 2rem;
+}
+.categories a{
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+
+.post-content{
+    padding: 1rem 3rem ;
+}
+.post small{
+    padding: 0.3rem 3rem;
+    background: black;
+    color: white;
+    border-radius: 2rem;
+}
+.post-content a{
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bold;
+}
+.post-image{
+    width: 20rem;
+} */

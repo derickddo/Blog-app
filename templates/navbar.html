@@ -1,0 +1,40 @@
+{% load static %}
+<div class="navbar-block">
+    <nav class="navbar container">
+        <h3><a href="/"> BLOGGING</a></h3>
+
+        <ul class="">
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'create_post' %}">Post</a></li>
+            <li><a class="categories" href="">Categories   <img src="{% static 'images/down1.png' %}" alt=""></a></li>
+        </ul>
+       
+            <div class="authentication">
+                {% if request.user.is_authenticated %}
+                <div class="profile">
+                    <div class="avatar">
+                        <img src="{{request.user.avatar.url}}" alt="{{request.user.name}}">
+                    </div>
+                    <a href="{% url 'profile' request.user.id %}">{{request.user.name}}</a>
+                </div>
+                |
+                <div>
+                    <a href="{% url 'logout' %}">logout</a> 
+                </div>
+                {% else %}
+                <div>
+                    <a href="{% url 'login' %}">login</a>
+                </div>    
+                {% endif %}  
+            </div> 
+        </ul>
+            
+    </nav>
+
+</div>
+<div class="categories-block">
+    {% include 'app/category-component.html' %}
+</div>
+
+
+   

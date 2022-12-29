@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="create-post">
+    <div class="overlay">
+        <div class="container">
+            <div class="delete">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="text">
+                        <span>Are sure you want to delete</span> 
+                        <h3>{{obj|upper}}</h3>
+                    </div>
+                    
+                    <div>
+                        <a class="btn btn-black" href="{{request.META.HTTP_REFERER}}">Go Back</a>
+                        <input class="btn btn-danger" type="submit" value="Confirm">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

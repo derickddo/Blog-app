@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="home">
+    <div class="banner-image">
+        <!-- <div> -->
+            <div class="overlay ">
+                <div class="container upper">
+                    <div>    
+                        <form action="" method="get">
+                            <input type="text" name="q" id="" placeholder="Search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>           
+    <div class="home-wrapper" >
+        <a id="home" href=""></a>
+            <div class="home-container container" >  
+            <!--   -->
+            {% include 'app/post-feed-component.html' %} 
+            {% include 'app/recent-activity-component.html' %} 
+
+    </div>
+</div>
+{% endblock %}
+
+                    
+                    <!-- <img src="{% static 'images/image2.jpg' %}" alt=""> -->  

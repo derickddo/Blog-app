@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="create-post">
+    <div class="overlay">
+        <div class="container"></div>
+            <div class="create-post-div">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+
+                    <input class="btn btn-black" type="submit" value="Post">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

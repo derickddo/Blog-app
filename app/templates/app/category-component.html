@@ -1,0 +1,16 @@
+<div>
+    <div class="categories">     
+        <div class="category-container">
+            <div>
+                <a href="/">All</a>
+            </div>
+            {% for category in categories %}
+                <div>
+                    <a href="{% url 'home' %}?q={{category.name}}">{{category.name}}</a>
+                </div>
+                {% empty %}
+                <p>No categories</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>

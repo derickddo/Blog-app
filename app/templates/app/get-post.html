@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-post">
+    
+    <div class="container">
+        <div class="post-image">
+            <img src="{{post.photo.url}}" alt="{{post.name}}">
+        </div>
+        <div class="post-content-container">
+            <div>
+                <h2>{{post.title|title}}</h2>
+                <p>{{post.body}}</p>
+                <small class="small">Posted {{post.created_at | timesince}} ago</small>
+                <!-- <span>Updated {{post.updated_at | timesince}} ago</span> -->
+                <div class="profile">
+                    <div class="avatar">
+                        <img src="{{post.author.avatar.url}}" alt="{{post.author.name}}">
+                    </div>
+                    <i><a class="name" href="{% url 'profile' post.author.id %}">{{post.author.name}}</a></i>
+                </div>
+            </div>
+            <div class="buttons">
+                {% if request.user == post.author %}
+                    <a class="btn btn-black" href="{% url 'update_post' post.id %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'delete_post' post.id %}">Delete</a>
+                {% endif %}
+            </div>
+
+            <div class="comment-wrapper">
+                {% for comment in comments %}
+                    <div class="comment">
+                        <div>
+                            <a href="">{{comment.user.name}}</a>
+                            <span>{{comment.created_at|timesince}} ago</span>
+                            <p>{{comment.body}}</p>
+                            
+                        </div>
+
+                        <div>
+                            {% if request.user == comment.user %}
+                        <a class="btn btn-danger" href="{% url 'delete_comment' comment.id %}">X</a>
+                        {% endif %}
+                        </div>
+                    </div>
+                  {% empty %}
+                  <p>No messages</p>  
+                {% endfor %}
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="comment" placeholder="Write your message">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

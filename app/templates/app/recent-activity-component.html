@@ -1,0 +1,20 @@
+<div class="activity-feed">
+    <h3>RECENT ACTIVITY</h3>
+    <div class="activity-feed-container">
+        {% for comment in comments %}
+            <div class="activity">
+                <div class="profile">
+                    <div class="avatar">
+                        <img src="{{comment.user.avatar.url}}" alt="{{comment.user.name}}">
+                    </div>
+                    <a class="name" href="{% url 'profile' comment.user.id %}">{{comment.user.name}}</a>
+                </div>
+                <p>commented on <h4><a href="{% url 'get_post' comment.post.id %}">{{comment.post.title|upper}}</h4></a></p>
+                <p>{{comment.created_at|timesince}} ago</p>
+                <div class="message">
+                    <p> {{comment.body}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
