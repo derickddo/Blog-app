@@ -1,0 +1,22 @@
+{% extends 'base_2.html' %}
+{% block title %}Add category{% endblock title %}
+{% block content %}
+<div class="create-post">
+        
+    <div class="container">
+        <div class="create-post-div">
+            
+            <form class='form' action="" method="post">
+                <h2>Add a category</h2>
+                {% csrf_token %}
+                <input type="text" name="category" required spellcheck='true'>
+                
+                <input class="btn btn-black" type="submit" value="Add">
+                
+            </form>
+        </div>
+    </div>
+      
+     
+</div>
+{% endblock content %}

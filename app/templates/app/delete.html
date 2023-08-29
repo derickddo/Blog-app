@@ -1,8 +1,9 @@
-{% extends 'base.html' %}
 
+{% extends 'base_2.html' %}
+{% block title %}Delete{% endblock title %}Login
 {% block content %}
-<div class="create-post">
-    <div class="overlay">
+    <div class="create-post">
+
         <div class="container">
             <div class="delete">
                 <form action="" method="post">
@@ -14,11 +15,12 @@
                     
                     <div>
                         <a class="btn btn-black" href="{{request.META.HTTP_REFERER}}">Go Back</a>
-                        <input class="btn btn-danger" type="submit" value="Confirm">
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-</div>
-{% endblock %}
+        
+    </div>   
+{% endblock content %}
+

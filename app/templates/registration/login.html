@@ -1,19 +1,22 @@
-{% extends 'base.html' %}
-
+{% extends 'base_2.html' %}
+{% block title %}Login{% endblock title %}Login
 {% block content %}
 <div class="create-post">
-    <div class="overlay">
-        <div class="container">
-            <div class="create-post-div login">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{form.as_p}}
-
-                    <input class="btn btn-black" type="submit" value="Login">
-                    <p>Don't Have an account ? sign up | <a  href="{% url 'sign_up' %}">Here</a></p>
-                </form>
-            </div>
+        
+    <div class="container">
+        <div class="create-post-div login">
+            
+            <form class='form' action="" method="post">
+                <h2>Login</h2>
+                {% csrf_token %}
+                {{form.as_p}}
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                <input class="btn btn-black" type="submit" value="Login">
+                <p>Don't Have an account ? sign up | <a  href="{% url 'sign_up' %}">Here</a></p>
+            </form>
         </div>
     </div>
+      
+     
 </div>
-{% endblock %}
+{% endblock content %}

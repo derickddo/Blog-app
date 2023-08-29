@@ -1,33 +1,101 @@
 {% load static %}
 <div class="navbar-block">
     <nav class="navbar container">
-        <h3><a href="/"> BLOGGING</a></h3>
+        <h3><a href="{% url 'home' 1 %}">BLOGGING</a></h3>
 
-        <ul class="">
-            <li><a href="/">Home</a></li>
+        <ul class="middle">
+            <li><a href="{% url 'home' 1 %}">Home</a></li>
+            {% if   request.user.is_superuser %}
             <li><a href="{% url 'create_post' %}">Post</a></li>
-            <li><a class="categories" href="">Categories   <img src="{% static 'images/down1.png' %}" alt=""></a></li>
+            {% endif %}
+
+            <li class="categories">
+               <div class="dropbtn">Categories
+                <i class="bi bi-caret-down-fill"></i>
+               </div>  
+                
+                <div class="dropdown-content">
+                    {% include "app/category-component.html" %}
+                </div>
+            </li>
         </ul>
        
-            <div class="authentication">
-                {% if request.user.is_authenticated %}
-                <div class="profile">
-                    <div class="avatar">
-                        <img src="{{request.user.avatar.url}}" alt="{{request.user.name}}">
+        
+        <div class="authentication">
+            {% if request.user.is_authenticated %}
+            <div class="profile">
+                <div class="avatar">
+                    <img src="{{request.user.avatar.url}}" alt="{{request.user.name}}">
+                </div>
+                <a class="name" href="{% url 'profile' request.user.id %}">{{request.user.name}}</a>
+            </div>
+            |
+            <div>
+                <a class="login-and-logout" href="{% url 'logout' %}">logout </a> 
+            </div>
+            {% else %}
+            <div>
+                <a class="login-and-logout" href="{% url 'login' %}">login </a>
+            </div>    
+            {% endif %}  
+        </div> 
+       
+        
+
+        <div class="menu">
+            <i class="bi bi-list main-menu"></i>
+            <i class="bi bi-x-lg cancel"></i>
+        </div>
+            
+        <div class="menu-content">
+            <ul class="middle">
+                <li class="authentication">
+                    {% if request.user.is_authenticated  and request.user.is_superuser %}
+                    <div class="profile">
+                        <div class="avatar">
+                            <img src="{{request.user.avatar.url}}" alt="{{request.user.name.0}}">
+                        </div>
+                        <a class="name" href="{% url 'profile' request.user.id %}">{{request.user.name.0}}</a>
                     </div>
-                    <a href="{% url 'profile' request.user.id %}">{{request.user.name}}</a>
-                </div>
-                |
-                <div>
-                    <a href="{% url 'logout' %}">logout</a> 
-                </div>
-                {% else %}
-                <div>
-                    <a href="{% url 'login' %}">login</a>
-                </div>    
-                {% endif %}  
-            </div> 
-        </ul>
+                    |
+                    <div>
+                        <a class="login-and-logout" href="{% url 'logout' %}">logout </a> 
+                    </div>
+                    {% elif request.user.is_superuser %}
+                    <div>
+                        <a class="login-and-logout" href="{% url 'login' %}">login</a>
+                    </div>    
+                    {% endif %}  
+                </li> 
+            
+                <li><a href="{% url 'home' 1 %}">Home</a></li>
+                {% if   request.user.is_superuser %}
+                    <li><a href="{% url 'create_post' %}">Post</a></li>
+                {% endif %}
+                <li class="categories-wrapper">
+                    <div class="dropbtn">Categories
+                        <i class="bi bi-caret-down-fill"></i>
+                    </div>  
+                    <div class='dropdown-content on-mobile'>
+                        {% include "app/category-component.html" %}
+                    </div>
+                </li>
+                
+                <li>
+                   
+                    {% if request.user.is_authenticated %}
+                    
+                     <a class="login-and-logout" href="{% url 'logout' %}">logout </a> 
+                  
+                    {% else %}
+                   
+                    <a class="login-and-logout" href="{% url 'login' %}">login </a>
+                       
+                    {% endif %}  
+                    
+                </li>
+            </ul>
+            
             
     </nav>
 

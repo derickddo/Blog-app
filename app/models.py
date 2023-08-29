@@ -55,7 +55,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return  self.body[0:50]
+        return  self.body[0:5]
 
     class Meta:
         db_table = 'comment'

@@ -20,3 +20,8 @@ class UpdateUserForm(ModelForm):
     class Meta:
         model = User
         fields = ['email', 'name','bio', 'avatar']
+
+class UpdateCommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']

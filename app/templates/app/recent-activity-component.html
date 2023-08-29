@@ -1,5 +1,8 @@
 <div class="activity-feed">
-    <h3>RECENT ACTIVITIES</h3>
+    <div class="header">
+        <h3>RECENT ACTIVITIES</h3>
+    </div>
+    
     <div class="activity-feed-container">
         {% for comment in comments %}
             <div class="activity">
@@ -9,12 +12,17 @@
                     </div>
                     <a class="name" href="{% url 'profile' comment.user.id %}">{{comment.user.name}}</a>
                 </div>
-                <p>commented on <h4><a href="{% url 'get_post' comment.post.id %}">{{comment.post.title|upper}}</h4></a></p>
-                <p>{{comment.created_at|timesince}} ago</p>
+                {% comment %} <p>commented on <h4><a href="{% url 'get_post' comment.post.id %}">{{comment.post.title|upper}}</h4></a></p> {% endcomment %}
+                
                 <div class="message">
-                    <p> {{comment.body}}</p>
+                    <span style=" font-size: 0.9rem; font-weight:bold">commented on</span>
+                    <br>
+                    <a style="color:#000; font-size: 0.9rem;" href="{% url 'get_post' comment.post.pk %}?q={{comment.pk}}"> {{comment.body|truncatewords:6}}</a>
                 </div>
+                <p class="small">{{comment.created_at|timesince}} ago</p>
             </div>
+            {% empty %}
+            <p>No activity</p>
         {% endfor %}
     </div>
 </div>

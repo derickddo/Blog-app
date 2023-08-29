@@ -1,19 +1,24 @@
-{% extends 'base.html' %}
-
+{% extends 'base_2.html' %}
+{% block title %}Sign up{% endblock title %}Login
 {% block content %}
-<div class="sign-up create-post ">
-    <div class="overlay">
-        <div class="container">
-            <div class="create-post-div">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{form.as_p}}
+    <div class="sign-up create-post ">
+       <div class="container">
+        <div class="create-post-div">
+            <form class='form' action="" method="post">
+                <h2>Sign up</h2>
+                <br>
+                {% csrf_token %}
+                {{form.as_p}}
 
-                    <input class="btn btn-black" type="submit" value="Sign up">
-                    <p>Have an account ? login  | <a  href="{% url 'login' %}">Here</a></p>
-                </form>
-            </div>
+                <input class="btn btn-black" type="submit" value="Sign up">
+                <br>
+                <br>
+                <p>Have an account ? login  | <a  href="{% url 'login' %}">Here</a></p>
+            </form>
         </div>
     </div>
-</div>
-{% endblock %}
+
+{% endblock content%}
+       
+
+

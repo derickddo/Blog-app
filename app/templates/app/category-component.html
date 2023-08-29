@@ -1,16 +1,20 @@
-<div>
-    <div class="categories">     
-        <div class="category-container">
-            <div>
-                <a href="/">All</a>
-            </div>
-            {% for category in categories %}
-                <div>
-                    <a href="{% url 'home' %}?q={{category.name}}">{{category.name}}</a>
-                </div>
-                {% empty %}
-                <p>No categories</p>
-            {% endfor %}
+
+<div class="categories">     
+    <div class="category-container">
+        <div>
+            <a href="{% url 'home' 1 %}">All</a>
         </div>
+        {% for category in categories %}
+            <div>
+                <a href="{% url 'home' page_object.number %}?q={{category.name}}">     
+                        {{category.name}}
+                    </a>
+            </div>
+        {% endfor %}
+        {% if request.user.is_superuser %}
+        <div class="">
+            <a href="{% url 'add_category' %}">Add category</a>
+        </div>
+        {% endif %}
     </div>
 </div>

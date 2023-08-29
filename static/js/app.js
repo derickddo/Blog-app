@@ -1,23 +1,30 @@
-function handleNavbar() {
-    categories_block.classList.remove('block')   
-}
 
-window.addEventListener('scroll', handleNavbar)
+let menu = document.querySelector('.menu')
+let category_btn = document.querySelector('.categories-wrapper')
+let content_menu = document.querySelector('.menu-content')
+let dropdown_content = document.querySelector('.on-mobile')
+let main_menu = document.querySelector('.main-menu')
+let cancel = document.querySelector('.cancel')
+let dotted_menu = document.querySelectorAll('.dotted_menu')
+let dotted_menu_content = document.querySelectorAll('.dotted_menu_content')
 
-let categories_block = document.querySelector('.categories-block')
-let categories_over = document.querySelector('.categories')
-let categories_leave = document.querySelector('.categories')
+menu.addEventListener("click", ()=> {
+    main_menu.classList.toggle('main-menu-toggle')
+    cancel.classList.toggle('cancel-toggle')
+    content_menu.classList.toggle('menu-content-added')
+   
+})
 
-categories_over.addEventListener('mouseover', handleCategoriesMouseover)
-// categories_leave.addEventListener('mouseleave', handleCategoriesMouseover)
-let body = document.querySelector('body')
+category_btn.addEventListener("click", ()=> {
+    console.log('hello')
+    dropdown_content.classList.toggle('clicked')
+})
 
-function handleCategoriesMouseover() {
-    categories_block.classList.toggle('block')   
-}
-
-
-body.addEventListener('click', ()=>{
-    categories_block.classList.remove('block')
+dotted_menu.forEach(item => {
+    item.addEventListener("click", ()=>{
+        content = item.childNodes.item(3)
+        content.classList.toggle('dotted_menu_content_toggle')
+    })
+    
 })
 

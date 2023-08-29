@@ -1,11 +1,14 @@
 
 <div class="feed-component">
     <h3>RECENT POSTS</h3>
+    {% if page_object %}
     <div class="post-container">    
-        {% for post in posts %}  
+        {% for post in page_object %}  
             <div class="post">
                 <div class="post-image">
-                    <a href="{% url 'get_post' post.id %}"><img src="{{post.photo.url}}" alt=""></a>
+                    <a href="{% url 'get_post' post.id %}">
+                        <img src="{{post.photo.url}}" alt="">
+                    </a>
                 </div>
                 
                 <div class="post-content">
@@ -15,8 +18,8 @@
                            
                             <small class="category">{{post.category}}</small>  
                         </div>
-                        <h3><a href="{% url 'get_post' post.id %}">{{post.title | title}}</a></h3> 
-                        <p>{{post.body}}</p>
+                        <h3><a href="{% url 'get_post' post.id %}">{{post.title}}</a></h3> 
+                        <a style="color: black;" href="{% url 'get_post' post.pk %}">{{post.body|truncatewords:20}}</a>
                         <div class="profile">
                             <div class="avatar">
                                 <img src="{{post.author.avatar.url}}" alt="{{post.author.name}}">
@@ -26,8 +29,35 @@
                     </div>   
                 </div>
             </div>
-            {% empty %}
-            <p>No posts yet</p>
+           
         {% endfor %}
+    </div>
+    {%  else  %}
+    <p>No posts yet</p>
+    {% endif %}
+   
+    <div class="pagination">
+        {% if page_object.has_previous %}
+            {% if q %}
+                <a href="{% url 'home' page_object.previous_page_number %}?q={{q}}">
+                    
+                    <span><<</span>Previous 
+                </a>
+            {% else %}
+                <a href="{% url 'home' page_object.previous_page_number %}">
+                    
+                    <span><<</span>Previous 
+                </a>
+        {% endif %}
+        
+        {% endif %}
+
+        {% if page_object.has_next %}
+            {% if q %}
+                <a href="{% url 'home' page_object.next_page_number %}?q={{q}}">Next>></a>
+            {% else %}
+                <a href="{% url 'home' page_object.next_page_number %}">Next>></a>
+            {% endif %}
+        {% endif %}
     </div>
 </div>

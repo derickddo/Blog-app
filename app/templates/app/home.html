@@ -3,29 +3,38 @@
 {% load static %}
 {% block content %}
 <div class="home">
+    {% if page_object %}
     <div class="banner-image">
-        <!-- <div> -->
-            <div class="overlay ">
-                <div class="container upper">
-                    <div>    
-                        <form action="" method="get">
-                            <input type="text" name="q" id="" placeholder="Search">
-                        </form>
-                    </div>
-                </div>
+        
+        <img src="{{ page_object.0.photo.url }}" alt="">
+        
+        <div class="overlay ">
+            <div class="upper">
+                <h1>{{ page_object.0.title }}</h1>
+                <p>{{ page_object.0.body|truncatewords:15 }}</p> 
             </div>
-        <!-- </div> -->
-    </div>           
-    <div class="home-wrapper" >
-        <a id="home" href=""></a>
+        </div> 
+    </div> 
+    
+      <div class="home-wrapper" >
             <div class="home-container container" >  
-            <!--   -->
-            {% include 'app/post-feed-component.html' %} 
-            {% include 'app/recent-activity-component.html' %} 
+                <!--   -->
+                {% include 'app/post-feed-component.html' %} 
+                {% include 'app/recent-activity-component.html' %} 
+            </div>
 
     </div>
+    {% else %}
+    <div class="container" style="height: 100vh; margin-top:10rem">
+        <p>No post on {{ q }}</p>
+        <br>
+        <a href="{{ request.META.HTTP_REFERER }}"> <span><<</span>go back</a>
+    </div>
+    
+    
+    {% endif %}  
+    
 </div>
 {% endblock %}
 
-                    
-                    <!-- <img src="{% static 'images/image2.jpg' %}" alt=""> -->  
+    
