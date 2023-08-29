@@ -9,10 +9,13 @@
         <img src="{{ page_object.0.photo.url }}" alt="">
         
         <div class="overlay ">
-            <div class="upper">
-                <h1>{{ page_object.0.title }}</h1>
-                <p>{{ page_object.0.body|truncatewords:15 }}</p> 
+            <div class="container upper-container">
+                <div class="upper">
+                    <h1>{{ page_object.0.title }}</h1>
+                    <p>{{ page_object.0.body|truncatewords:15 }}</p> 
+                </div>
             </div>
+           
         </div> 
     </div> 
     
