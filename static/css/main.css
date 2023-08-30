@@ -703,6 +703,10 @@ footer a, footer p{
     .post-content-container div p{
         width: 100%;
     }
+    .upper p{
+        width: 100%;
+    }
+    
     
 }
 
