@@ -27,8 +27,9 @@
                     <a class="btn btn-danger" href="{% url 'delete_post' post.id %}">Delete</a>
                 {% endif %}
             </div>
-
-            <div class="comment-wrapper">
+            <h3>Comments</h3>
+ 
+            <div class="comment-wrapper"> 
                 {% for comment in comments %}
                     <div class="comment" id="{{comment.pk}}">
                         <div class="">
@@ -48,7 +49,7 @@
             
                             {% if request.user == comment.user %}
                                 <div class="dotted_menu">
-                                    <i class="bi bi-three-dots"></i>
+                                    <i class="bi bi-three-dots dotted_menu_btn"></i>
                                     <ul class="dotted_menu_content">
                                         <li><a href="{% url 'delete_comment' comment.id %}">Delete</a></li>
                                         <li><a href="{% url 'update_comment' comment.id %}">Edit</a></li>
@@ -58,7 +59,7 @@
                        
                     </div>
                   {% empty %}
-                  <p>No messages</p>  
+                  <p>No comments</p>  
                 {% endfor %}
             </div>
             <form action="" method="post">

@@ -1,10 +1,15 @@
 {% extends 'base_2.html' %}
-{% block title %}Update post{% endblock title %}Login
+{% block title %}Update Post{% endblock title %}
+{% load static %}
 {% block content %}
     <div class="create-post">
-       <div class="container">
+        <div class="container">
             <div class="create-post-div">
+
                 <form class='form' action="" method="post" enctype="multipart/form-data">
+                    
+                <h2>Update Post</h2>
+                <br>
                     {% csrf_token %}
                     {{form.as_p}}
                     <br>
@@ -14,11 +19,14 @@
                     <div id="photo-display">
                         <img id="display-image" src="" alt="">
                     </div>
-                    <input class="btn btn-black" type="submit" value="Save">
+                    <input class="btn btn-black" type="submit" value="Post">
                 </form>
             </div>
-       </div>
-            
-        
-    </div>  
+       </div>      
+       
+    </div> 
 {% endblock content %}
+
+{% block create_post_js %}
+<script src="{% static 'js/create_post.js' %}"></script>
+{% endblock create_post_js %}

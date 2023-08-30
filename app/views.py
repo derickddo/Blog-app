@@ -38,7 +38,10 @@ def profile(request,pk):
     context = {'user':user, 'posts':posts, 'comments':comments}
     return render(request, 'app/profile.html', context)
 
+def redirect_to_home(request):
+    return redirect('home', 1)
 
+    
 def home(request, page):
     if request.GET.get('q'):
         q = request.GET.get('q')

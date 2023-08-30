@@ -5,20 +5,19 @@
     <div class="create-post">
 
         <div class="container">
-            <div class="delete">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div class="text">
-                        <span>Are sure you want to delete</span> 
-                        <h3>{{obj|upper}}</h3>
-                    </div>
-                    
-                    <div>
-                        <a class="btn btn-black" href="{{request.META.HTTP_REFERER}}">Go Back</a>
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </div>
-                </form>
-            </div>
+            <form class='delete-form' action="" method="post">
+                {% csrf_token %}
+                <div class="text">
+                    <span>Are sure you want to delete</span> 
+                    <h3>{{obj|upper}}</h3>
+                </div>
+                
+                <div>
+                    <a class="btn btn-black" href="{{request.META.HTTP_REFERER}}">Go Back</a>
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </div>
+            </form>
+        
         </div>
         
     </div>   
