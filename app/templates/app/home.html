@@ -2,46 +2,96 @@
 
 {% load static %}
 {% block content %}
+
 <div class="home">
-    {% if page_object %}
-    <div class="banner-image">
-        
-        <img src="{{ page_object.0.photo.url }}" alt="">
-        
-        <div class="overlay ">
-            <div class="container">
-                <div class="upper-container">
-                    <div class="upper">
-                        <h1>{{ page_object.0.title }}</h1>
-                        <p>{{ page_object.0.body|truncatewords:15 }}</p> 
+    
+    {% if page_object %}  
+        <div class="banner-image">
+            
+            <img src="{{ page_object.0.photo.url }}" alt="">
+            
+            <div class="overlay ">
+                <div class="container">
+                    <div class="upper-container">
+                        <div class="upper">
+                            <h1>{{ page_object.0.title }}</h1>
+                            <p>{{ page_object.0.body|truncatewords:15 }}</p> 
+                        </div>
                     </div>
+
+                    
+                </div>
+            
+            </div> 
+        </div> 
+        
+        <div class="home-wrapper" >
+                <div class="home-container container" >  
+                    <!--   -->
+                    {% include 'app/post-feed-component.html' %} 
+                    {% include 'app/recent-activity-component.html' %} 
                 </div>
 
-                
-            </div>
-           
-        </div> 
-    </div> 
-    
-      <div class="home-wrapper" >
-            <div class="home-container container" >  
-                <!--   -->
-                {% include 'app/post-feed-component.html' %} 
-                {% include 'app/recent-activity-component.html' %} 
-            </div>
-
-    </div>
+        </div>
     {% else %}
-    <div class="container" style="height: 100vh; margin-top:10rem">
-        <p>No post on {{ q }}</p>
-        <br>
-        <a href="{{ request.META.HTTP_REFERER }}"> <span><<</span>go back</a>
-    </div>
+        <div class="container" style="height: 100vh; margin-top:10rem">
+            
+            {% if q %}
+                <p>No post on {{ q }}</p> 
+                {% else %}
+                <p>No posts available</p>
     
-    
-    {% endif %}  
-    
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'create_post' %}">Post</a>
+                {% endif %}
+            {% endif %}
+                
+            <br>
+            <a href="{{ request.META.HTTP_REFERER }}"> <span><<</span>go back</a>
+        </div>
+    {% endif %}
 </div>
+ 
+
 {% endblock %}
+
+
+<!-- {% block ajax %}
+
+
+<script>
+
+    function fetchNewPosts(){
+        console.log('hello')
+        fetch("http://127.0.0.1:8000/page/1")  // Replace with your actual endpoint
+            .then(data => data.json())
+            .then(post => {
+
+                console.log(post)
+               // const postContainer = document.getElementById('post-container');
+               // postContainer.innerHTML = '';  // Clear existing content
+
+                //data.posts.forEach(post => {
+                    // Create a new post element and populate it with data
+                   // const postElement = document.createElement('div');
+                    // Populate the postElement with post data (similar to your existing code)
+                    // ...
+
+                    // Append the post element to the post container
+                   // postContainer.appendChild(postElement);
+                //});
+            })
+            //.catch(error => {
+             //   console.error('Error fetching new posts:', error);
+            //});
+    }
+
+    // Fetch new posts every 5 seconds
+    setInterval(fetchNewPosts, 5000);
+</script>
+{% endblock ajax %} -->
+
+
+
 
     

@@ -459,25 +459,29 @@ background-size: cover; */
     color: black;
 }
 .message{
-  
     color: black;
     
 }
 .create-post-div{
     height: 100%;
-    padding: 5rem 0;
-    
+    display: flex;
+    align-items: center;
 }
 
 .create-post-div .form{
    width: 30rem;
-   margin:0 auto;
+   margin:auto;
    background:white;
    padding: 1.5rem;
    -webkit-box-shadow: 2.5px 1.5px 10px 3px #dddddd;
     -moz-box-shadow: 2.5px 1.5px 10px 3px #dddddd;
     box-shadow: 2.5px 1.5px 10px 3px #dddddd;
     border-radius: 0.3rem;
+    height: fit-content;
+}
+.create-post{
+    height: 100vh;
+    
 }
 .bio{
     width: 23rem;
@@ -512,15 +516,8 @@ textarea{
 .create-post-div input{
     margin-top: 1rem;
 }
-.create-post {
-   height: 100vh;
-}
-.create-post .container{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-}
+
+
 .delete-form{
     width: 30rem;
     background: white;
@@ -624,9 +621,13 @@ footer a, footer p{
         padding: 2rem; 
         margin-top: 5rem; 
         left: 0;
+        
     }
     .menu-content-added ul{
         display: block;
+        height: 100%;
+        overflow-y: auto;
+      
     }
     .menu-content-added .dropbtn img{
         width: 1rem;

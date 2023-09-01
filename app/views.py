@@ -6,6 +6,9 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.core.serializers import serialize
+from django.http import response
+
 
 # Create your views here.
 def sign_up(request):
@@ -63,16 +66,21 @@ def home(request, page):
     
     paginator = Paginator(posts, per_page=3)
     page_object = paginator.get_page(page)
+   
     
     context = {
         'posts':posts, 
         'categories':categories,
         'comments':comments,  
         'page_object':page_object,
-        'q':q
+        'q':q,
+
  
     }
+   
+        
     return render(request, 'app/home.html', context)
+    
 
 @login_required(login_url='login')
 def create_post(request):
