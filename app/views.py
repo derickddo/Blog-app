@@ -7,10 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.core.serializers import serialize
-from django.http import response
-
+from django.http import JsonResponse
+from django.template.defaultfilters import timesince_filter
+import json
 
 # Create your views here.
+def is_ajax(request):
+    return request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
 def sign_up(request):
     form = RegisterForm()
     if request.method == 'POST':
@@ -34,12 +38,13 @@ def update_user(request):
     return render(request, 'app/update-user.html', context)
 
 
-def profile(request,pk):
-    user = User.objects.get(id =pk)
+def profile(request,id):
+    user = User.objects.get(id =id)
     posts = user.post_set.all()
     comments = user.comment_set.all()
     context = {'user':user, 'posts':posts, 'comments':comments}
     return render(request, 'app/profile.html', context)
+
 
 def redirect_to_home(request):
     return redirect('home', 1)
@@ -66,7 +71,6 @@ def home(request, page):
     
     paginator = Paginator(posts, per_page=3)
     page_object = paginator.get_page(page)
-   
     
     context = {
         'posts':posts, 
@@ -75,10 +79,22 @@ def home(request, page):
         'page_object':page_object,
         'q':q,
 
- 
-    }
-   
-        
+    }   
+    if is_ajax(request):
+        posts = []
+        for post in page_object:
+            data = {
+                'title':post.title,
+                'body':post.body,
+                'photo':post.photo.url,
+                'author_name':post.author.name,
+                'avatar':post.author.avatar.url,
+                'category':post.category.name,
+                'created_at':timesince_filter(post.created_at),
+                'post_id':post.id
+            }
+            posts.append(data)
+        return JsonResponse({'posts':posts})
     return render(request, 'app/home.html', context)
     
 
@@ -102,13 +118,25 @@ def create_post(request):
 @login_required(login_url='login')
 def get_post(request, pk):
     post = Post.objects.get(id=pk)
-    if request.method == 'POST':
-        Comment.objects.create (
-            user = request.user,
-            body = request.POST.get('comment'),
-            post = post
-        )
-        return redirect('get_post', pk=post.pk)
+    if is_ajax(request):
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            print(data)
+            message = Comment.objects.create (
+                user = request.user,
+                body = data,
+                post = post
+            )
+            message.save()
+            comment = {
+                'body':message.body,
+                'user_avatar':message.user.avatar.url,
+                'user_name':message.user.name,
+                'created_at':timesince_filter(message.created_at),
+                'user_id':message.user.id,
+                'id':message.id
+            }
+            return JsonResponse({'message':comment})
     comments = post.comment_set.all()
     context = {'post':post, 'comments':comments}
     return render(request,'app/get-post.html', context)

@@ -3,39 +3,12 @@
     <h3>RECENT POSTS</h3>
     {% if page_object %}
     <div class="post-container">    
-        {% for post in page_object %}  
-            <div class="post">
-                <div class="post-image">
-                    <a href="{% url 'get_post' post.id %}">
-                        <img src="{{post.photo.url}}" alt="">
-                    </a>
-                </div>
-                
-                <div class="post-content">
-                    <div>
-                        <div class="top">
-                            <small class="time">{{post.created_at|timesince}} ago</small>
-                           
-                            <small class="category">{{post.category}}</small>  
-                        </div>
-                        <h3><a href="{% url 'get_post' post.id %}">{{post.title}}</a></h3> 
-                        <a style="color: black;" href="{% url 'get_post' post.pk %}">{{post.body|truncatewords:20}}</a>
-                        <div class="profile">
-                            <div class="avatar">
-                                <img src="{{post.author.avatar.url}}" alt="{{post.author.name}}">
-                            </div>
-                            <a class="name" href="{% url 'profile' post.author.id %}">{{post.author.name}}</a>
-                        </div>  
-                    </div>   
-                </div>
-            </div>
-           
-        {% endfor %}
+        
     </div>
     {%  else  %}
     <p>No posts yet</p>
     {% endif %}
-   
+   <a class="page_number" href="{% url 'home' page_object.number %}?q={{q}}" hidden></a>
     <div class="pagination">
         {% if page_object.has_previous %}
             {% if q %}
@@ -61,3 +34,83 @@
         {% endif %}
     </div>
 </div>
+
+
+{% block ajax %}
+<script>
+    let url = document.querySelector('.page_number').href
+    console.log(url)
+    let postContainer = document.querySelector('.post-container')
+    let heroImage = document.querySelector('.hero-image')
+    let heroTitle = document.querySelector('.hero-title')
+    let heroP = document.querySelector('.hero-p')
+    let loader = document.querySelector('.loader')
+    let home = document.querySelector('.home')
+    let empty = document.querySelector('.empty')
+    let list = []
+    
+    loader.style.display = 'flex'
+    home.style.display = 'none'
+
+    function fetchPosts(){
+        let xhr = new XMLHttpRequest()
+        xhr.open('GET', url, true)
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                let response = JSON.parse(xhr.response)
+                for(item in response.posts){
+                    let value = response.posts[item]
+                    let body = value.body.substring(0, 100) + '...'
+                    const div = document.createElement('div')
+                    div.innerHTML = `
+                    <div class = "post">
+                        <div class="post-image">
+                            <a href="/get_post/${value.post_id}">
+                                <img src="${value.photo}" alt="">
+                            </a>
+                        </div>
+                
+                        <div class="post-content">
+                            <div>
+                                <div class="top">
+                                    <small class="time">${value.created_at}ago</small>
+                                
+                                    <small class="category">${value.category}</small>  
+                                </div>
+                                <h3><a href="/get_post/${value.post_id}">${value.title}</a></h3> 
+                                <a style="color: black;" href="/get_post/${value.post_id}">${body}</a>
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img src="${value.avatar}" alt="">
+                                    </div>
+                                    <a class="name" href="">${value.author_name}</a>
+                                </div>  
+                            </div>   
+                        </div>
+                    </div>  
+                    `
+                    
+                    list.push(div)
+                    
+                }
+                let html = ""
+                for(item in list){
+                    html = html.concat(list[item].innerHTML)
+                }
+                
+                loader.style.display = 'none'
+                home.style.display = 'inline-block'
+                heroImage.src = response.posts[0].photo
+                heroTitle.innerText = response.posts[0].title
+                heroP.innerText = response.posts[0].body.substring(0, 150) + '...'
+                postContainer.innerHTML = html
+                list.length = 0
+            }
+        }
+        xhr.send()
+    }
+    setInterval(fetchPosts, 2000)
+</script>
+{% endblock ajax %}
+    

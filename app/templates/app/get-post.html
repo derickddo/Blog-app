@@ -28,7 +28,7 @@
                 {% endif %}
             </div>
             <h3>Comments</h3>
- 
+            <input class="bool" type="hidden" name="" value="{{request.user}}">
             <div class="comment-wrapper"> 
                 {% for comment in comments %}
                     <div class="comment" id="{{comment.pk}}">
@@ -46,7 +46,7 @@
                             </div>
                             <p class="comment-body">{{comment.body}}</p>
                         </div>
-            
+                   
                             {% if request.user == comment.user %}
                                 <div class="dotted_menu">
                                     <i class="bi bi-three-dots dotted_menu_btn"></i>
@@ -59,10 +59,10 @@
                        
                     </div>
                   {% empty %}
-                  <p>No comments</p>  
+                  <p class="no-comment">No comments</p>  
                 {% endfor %}
             </div>
-            <form action="" method="post">
+            <form class="form" action="" method="post">
                 {% csrf_token %}
                 <input class='comment-input' type="text" name="comment" placeholder="Write your message">
             </form>  
@@ -71,3 +71,88 @@
     </div>
 </div>
 {% endblock %}
+
+
+{% block ajax %}
+    <script>
+        let url = "{% url 'get_post' post.id %}"
+        let form = document.querySelector('.form')
+        let crsfToken = form.querySelector('[name=csrfmiddlewaretoken]').value
+        let comment = document.querySelector('.comment-input')
+        let bool = document.querySelector('.bool').value
+        let commentWrapper = document.querySelector('.comment-wrapper')
+        let xhr = new XMLHttpRequest()
+
+
+        form.addEventListener('submit', (e)=>{
+            e.preventDefault()
+            xhr.open('POST', url, true)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.setRequestHeader('X-CSRFToken', crsfToken)
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    let response = JSON.parse(xhr.response)
+                    
+                    let comment = document.createElement('div')
+                    comment.innerHTML = `
+                        
+                            <div class="">
+                                <div class="comment-div">
+                                    <div class="profile">
+                                        <div class="avatar">
+                                            <img src="${response.message.user_avatar}" alt="">
+                                        </div>
+                                        <a class="name" href="">${response.message.user_name}</a>
+                                    </div>
+                                    <div class="small">
+                                        ${response.message.created_at} ago
+                                    </div>
+                                </div>
+                                <p class="comment-body">${response.message.body}</p>
+                            </div>
+                    
+                            
+                        
+                        
+                    `
+                    comment.classList.add('comment')
+                    let menu = document.createElement('div')
+                    if(bool == response.message.user_name){
+                        
+                        
+                        menu.innerHTML = `
+                            
+                            <i class="bi bi-three-dots dotted_menu_btn"></i>
+                            <ul class="dotted_menu_content">
+                                <li><a href="/delete_comment/${response.message.id}">Delete</a></li>
+                                <li><a href="/update_comment/${response.message.id}">Edit</a></li>
+                            </ul>
+                            
+                        `
+                        menu.classList.add('dotted_menu')
+                        comment.appendChild(menu)
+                    }
+                    commentWrapper.append(comment)
+
+    
+
+
+                }
+            }
+
+            let json_data = JSON.stringify(comment.value)
+            xhr.send(json_data)
+        })
+        let dotted_menu = document.querySelectorAll('.dotted_menu')
+        dotted_menu.forEach(item => {
+            item.addEventListener("click", ()=>{
+                content = item.childNodes.item(3)
+                content.classList.toggle('dotted_menu_content_toggle')
+            })
+            
+        })
+        
+    </script>
+{% endblock ajax %}
+    

@@ -2,20 +2,21 @@
 
 {% load static %}
 {% block content %}
-
+<div class="loader">
+    <img src="{% static 'images/spin.svg' %}" alt="">
+</div>
 <div class="home">
-    
     {% if page_object %}  
         <div class="banner-image">
             
-            <img src="{{ page_object.0.photo.url }}" alt="">
+            <img class="hero-image" src="" alt="">
             
             <div class="overlay ">
                 <div class="container">
                     <div class="upper-container">
                         <div class="upper">
-                            <h1>{{ page_object.0.title }}</h1>
-                            <p>{{ page_object.0.body|truncatewords:15 }}</p> 
+                            <h1 class="hero-title"></h1>
+                            <p class="hero-p"></p> 
                         </div>
                     </div>
 
@@ -34,8 +35,7 @@
 
         </div>
     {% else %}
-        <div class="container" style="height: 100vh; margin-top:10rem">
-            
+        <div class="container empty" style="margin-top:7rem; height: 100vh;">
             {% if q %}
                 <p>No post on {{ q }}</p> 
                 {% else %}
@@ -55,41 +55,6 @@
 
 {% endblock %}
 
-
-<!-- {% block ajax %}
-
-
-<script>
-
-    function fetchNewPosts(){
-        console.log('hello')
-        fetch("http://127.0.0.1:8000/page/1")  // Replace with your actual endpoint
-            .then(data => data.json())
-            .then(post => {
-
-                console.log(post)
-               // const postContainer = document.getElementById('post-container');
-               // postContainer.innerHTML = '';  // Clear existing content
-
-                //data.posts.forEach(post => {
-                    // Create a new post element and populate it with data
-                   // const postElement = document.createElement('div');
-                    // Populate the postElement with post data (similar to your existing code)
-                    // ...
-
-                    // Append the post element to the post container
-                   // postContainer.appendChild(postElement);
-                //});
-            })
-            //.catch(error => {
-             //   console.error('Error fetching new posts:', error);
-            //});
-    }
-
-    // Fetch new posts every 5 seconds
-    setInterval(fetchNewPosts, 5000);
-</script>
-{% endblock ajax %} -->
 
 
 
