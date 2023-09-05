@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -75,6 +75,8 @@ TEMPLATES = [
     },
 ]
 
+WSGI_APPLICATION = 'project.wsgi.application'
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
@@ -83,10 +85,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-WSGI_APPLICATION = 'project.wsgi.application'
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -127,6 +125,8 @@ STATIC_URL = 'static/'
 MEDIA_URL = 'images/'
 
 STATICFILES_DIRS = [BASE_DIR/'static']
+
+STATIC_ROOT = BASE_DIR/'staticfiles'
 
 MEDIA_ROOT = BASE_DIR /'static/images'
 
