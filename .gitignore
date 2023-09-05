@@ -1,11 +1,1 @@
-__pycache__/
-*.py[cod]
-*$py.class
-.venv
-venv/
-ENV/
-env.bak/
-venv.bak/
-cython_debug/
-pip-log.txt
-pip-delete-this-directory.txt
+
