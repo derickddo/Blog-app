@@ -5,10 +5,9 @@
         
     <div class="container">
         <div class="create-post-div login">
-            
             <form class='form' action="" method="post">
-                <h2>Login</h2>
                 {% csrf_token %}
+                <h2>Login</h2>
                 {{form.as_p}}
                 <a href="{% url 'password_reset' %}">Forgot Password?</a>
                 <input class="btn btn-black" type="submit" value="Login">
