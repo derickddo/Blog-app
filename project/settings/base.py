@@ -32,6 +32,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://blog-app-production-7d22.up.railway.app',
+    'https://127.0.0.1',
+]
 
 # Application definition
 
