@@ -32,17 +32,21 @@
             <div class="comment-wrapper"> 
                 {% for comment in comments %}
                     <div class="comment" id="{{comment.pk}}">
-                        <div class="">
+                        <div class="comment-inner">
                             <div class="comment-div">
                                 <div class="profile">
                                     <div class="avatar">
                                         <img src="{{comment.user.avatar.url}}" alt="{{comment.user.name}}">
                                     </div>
-                                    <a class="name" href="{% url 'profile' post.author.id %}">{{comment.user.name}}</a>
+                                    <div class="">
+                                        <a class="name" href="{% url 'profile' post.author.id %}">{{comment.user.name}}</a>
+                                        <div class="small">
+                                            {{comment.created_at|timesince}} ago
+                                        </div>
+                                    </div>
+                                   
                                 </div>
-                                <div class="small">
-                                    {{comment.created_at|timesince}} ago
-                                </div>
+                               
                             </div>
                             <p class="comment-body">{{comment.body}}</p>
                         </div>
@@ -103,18 +107,19 @@
                                         <div class="avatar">
                                             <img src="${response.message.user_avatar}" alt="">
                                         </div>
-                                        <a class="name" href="">${response.message.user_name}</a>
+                                        <div>
+                                            <a class="name" href="">${response.message.user_name}</a>
+                                            <div class="small">
+                                                ${response.message.created_at} ago
+                                            </div>
+                                        </div>
+                                       
                                     </div>
-                                    <div class="small">
-                                        ${response.message.created_at} ago
-                                    </div>
+                                    
                                 </div>
                                 <p class="comment-body">${response.message.body}</p>
                             </div>
-                    
-                            
-                        
-                        
+                      
                     `
                     comment.classList.add('comment')
                     let menu = document.createElement('div')

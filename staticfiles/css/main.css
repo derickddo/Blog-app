@@ -444,16 +444,16 @@ background-size: cover; */
     
 }
 
-.comment-wrapper{
-    margin-top: 1rem;
-    
-}
-
 .comment-div{
     display:flex;
     align-items: center;
     gap: 5rem;
+    margin-bottom: 2rem;
 }
+.comment-body{
+    font-size: 0.9rem;
+}
+
 .comment-input{
     border: 1.8px solid #999;
 }
