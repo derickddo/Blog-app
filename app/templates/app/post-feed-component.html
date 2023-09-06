@@ -62,6 +62,7 @@
                 for(item in response.posts){
                     let value = response.posts[item]
                     let body = value.body.substring(0, 100) + '...'
+                    let title = value.title.substring(0, 15) + "..."
                     const div = document.createElement('div')
                     div.innerHTML = `
                     <div class = "post">
